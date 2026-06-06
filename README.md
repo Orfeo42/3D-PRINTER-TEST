@@ -70,6 +70,6 @@ Lessons 1–3 + 5 use builder; lesson 4 shows algebra side-by-side.
 
 ## Docs
 
-- API: https://build123d.readthedocs.io
-- Cheat sheet: https://build123d.readthedocs.io/en/latest/cheat_sheet.html
-- Examples: https://build123d.readthedocs.io/en/latest/examples_1.html
+- API: <https://build123d.readthedocs.io>
+- Cheat sheet: <https://build123d.readthedocs.io/en/latest/cheat_sheet.html>
+- Examples: <https://build123d.readthedocs.io/en/latest/examples_1.html>
