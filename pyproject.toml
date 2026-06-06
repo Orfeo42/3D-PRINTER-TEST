@@ -1,0 +1,19 @@
+[project]
+name = "printer3d"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "build123d>=0.10.0",
+    "ocp-vscode>=3.4.0",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=2.1.0",
+]
+
+[tool.mypy]
+python_version = "3.13"
+mypy_path = "stubs:examples"
