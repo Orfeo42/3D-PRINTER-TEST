@@ -11,7 +11,9 @@ Run: uv run python examples/02_fillet_chamfer.py
 
 from build123d import Axis, Box, BuildPart, chamfer, fillet
 
-from _helpers import save, view
+from ocp_vscode import show
+
+from _helpers import save
 
 with BuildPart() as p:
     Box(40, 30, 15)
@@ -22,5 +24,5 @@ with BuildPart() as p:
     top_edges = p.faces().sort_by(Axis.Z)[-1].edges()
     chamfer(top_edges, length=2)
 
-view(p)
+show(p)
 save(p.part, "02_fillet_chamfer")

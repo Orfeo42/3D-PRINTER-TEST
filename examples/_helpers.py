@@ -1,34 +1,15 @@
-"""Shared export helpers for the lessons.
+"""Shared export helper for the lessons.
 
 build123d exports two formats you care about for 3D printing:
 - STEP: exact B-rep CAD geometry. Use to re-open/edit in CAD (FreeCAD, etc.).
 - STL : triangle mesh. Use to slice and print.
 """
 
-import os
 from pathlib import Path
 
 from build123d import Compound, export_step, export_stl
-from ocp_vscode import show
 
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
-
-
-def view(*objs: Compound | None) -> None:
-    """Send objects to the ocp_vscode viewer, if one is reachable.
-
-    ocp_vscode finds the viewer via the OCP_PORT env var. VS Code's OCP CAD
-    Viewer sets it automatically in its integrated terminal. From an external
-    terminal, run `uv run python -m ocp_vscode` and `export OCP_PORT=3939`.
-    No viewer -> skip cleanly; the model is still exported by save().
-    """
-    if not os.environ.get("OCP_PORT"):
-        print("viewer: OCP_PORT unset, skipping show() (model still exported)")
-        return
-    try:
-        show(*objs)
-    except (OSError, ValueError) as exc:
-        print(f"viewer: not reachable ({exc}); model still exported")
 
 
 def save(part: Compound | None, name: str) -> None:

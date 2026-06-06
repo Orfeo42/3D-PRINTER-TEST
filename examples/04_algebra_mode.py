@@ -16,7 +16,9 @@ Run: uv run python examples/04_algebra_mode.py
 
 from build123d import Box, Cylinder, Pos
 
-from _helpers import save, view
+from ocp_vscode import show
+
+from _helpers import save
 
 plate = Box(60, 40, 4)
 center_hole = Cylinder(radius=8, height=4)
@@ -32,5 +34,5 @@ part = plate - center_hole
 for hole in mounts:
     part = part - hole
 
-view(part)
+show(part)
 save(part, "04_algebra_mode")

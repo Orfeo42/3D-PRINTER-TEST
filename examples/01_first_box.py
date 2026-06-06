@@ -14,10 +14,12 @@ View: open the OCP CAD Viewer (VS Code: command "OCP CAD Viewer: Open")
 
 from build123d import Box, BuildPart
 
-from _helpers import save, view
+from ocp_vscode import show
+
+from _helpers import save
 
 with BuildPart() as p:
     Box(40, 20, 10)
 
-view(p)
+show(p)
 save(p.part, "01_first_box")

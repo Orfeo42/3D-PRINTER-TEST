@@ -21,7 +21,9 @@ from build123d import (
     fillet,
 )
 
-from _helpers import save, view
+from ocp_vscode import show
+
+from _helpers import save
 
 # --- parameters (edit these) ---
 LENGTH = 60.0
@@ -54,5 +56,5 @@ with BuildPart() as bracket:
     inner = bracket.edges().filter_by(Axis.X).group_by(Axis.Z)[1]
     fillet(inner, radius=FILLET_R)
 
-view(bracket)
+show(bracket)
 save(bracket.part, "05_parametric_bracket")

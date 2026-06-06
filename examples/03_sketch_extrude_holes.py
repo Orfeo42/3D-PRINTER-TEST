@@ -25,21 +25,23 @@ from build123d import (
     extrude,
 )
 
-from _helpers import save, view
+from ocp_vscode import show
+
+from _helpers import save
 
 with BuildPart() as p:
     # base plate profile, drawn flat, then given 4mm thickness
-    with BuildSketch() as base:
+    with BuildSketch():
         Rectangle(60, 40)
         Circle(8, mode=Mode.SUBTRACT)  # hole through the middle
     extrude(amount=4)
 
     # 4 mounting holes drilled from the top face down
     top = p.faces().sort_by(Axis.Z)[-1]
-    with BuildSketch(top) as mounts:
+    with BuildSketch(top):
         with Locations((-24, -14), (24, -14), (-24, 14), (24, 14)):
             Circle(2.5)
     extrude(amount=-4, mode=Mode.SUBTRACT)
 
-view(p)
+show(p)
 save(p.part, "03_sketch_extrude_holes")
