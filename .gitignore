@@ -13,3 +13,5 @@ wheels/
 output/*.stl
 output/*.step
 !output/.gitkeep
+
+CONTEXT.md
