@@ -7,7 +7,11 @@ build123d exports two formats you care about for 3D printing:
 
 from pathlib import Path
 
-from build123d import Compound, export_step, export_stl
+from build123d import (
+    Compound,
+    export_step,
+    export_stl,
+)
 
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
 
