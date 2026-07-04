@@ -9,20 +9,18 @@ Concepts:
 Run: uv run python examples/02_fillet_chamfer.py
 """
 
-from build123d import Axis, Box, BuildPart, chamfer, fillet
-
-from ocp_vscode import show
-
 from _helpers import save
+from build123d import Axis, Box, BuildPart, chamfer, fillet
+from ocp_vscode import show
 
 with BuildPart() as p:
     Box(40, 30, 15)
     # round the 4 vertical edges
     vertical_edges = p.edges().filter_by(Axis.Z)
-    fillet(vertical_edges, radius=5)
+    fillet(vertical_edges, radius=2)
     # chamfer the top face's perimeter
     top_edges = p.faces().sort_by(Axis.Z)[-1].edges()
-    chamfer(top_edges, length=2)
+    chamfer(top_edges, length=1)
 
 show(p)
 save(p.part, "02_fillet_chamfer")

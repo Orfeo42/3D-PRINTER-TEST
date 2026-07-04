@@ -14,6 +14,7 @@ Concepts:
 Run: uv run python examples/03_sketch_extrude_holes.py
 """
 
+from _helpers import save
 from build123d import (
     Axis,
     BuildPart,
@@ -23,17 +24,17 @@ from build123d import (
     Mode,
     Rectangle,
     extrude,
+    fillet,
 )
-
 from ocp_vscode import show
-
-from _helpers import save
 
 with BuildPart() as p:
     # base plate profile, drawn flat, then given 4mm thickness
     with BuildSketch():
         Rectangle(60, 40)
         Circle(8, mode=Mode.SUBTRACT)  # hole through the middle
+        vertical_edges = p.edges().filter_by(Axis.Z)
+        fillet(vertical_edges, radius=5)
     extrude(amount=4)
 
     # 4 mounting holes drilled from the top face down

@@ -12,14 +12,13 @@ View: open the OCP CAD Viewer (VS Code: command "OCP CAD Viewer: Open")
       or run `uv run python -m ocp_vscode` once to start the standalone server.
 """
 
-from build123d import Box, BuildPart
-
+from _helpers import save
+from build123d import Box, BuildPart, Cylinder
 from ocp_vscode import show
 
-from _helpers import save
-
 with BuildPart() as p:
-    Box(40, 20, 10)
+    Cylinder(radius=10, height=30)
+    Box(50, 10, 10)
 
 show(p)
 save(p.part, "01_first_box")

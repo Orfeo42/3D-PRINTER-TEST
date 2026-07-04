@@ -14,25 +14,34 @@ This builds the same kind of plate-with-holes as lesson 3, algebra-style.
 Run: uv run python examples/04_algebra_mode.py
 """
 
-from build123d import Box, Cylinder, Pos
-
+from _helpers import save
+from build123d import Axis, Box, Cylinder, Pos, fillet
 from ocp_vscode import show
 
-from _helpers import save
+thckness = 3
+plateH = 20
+plateW = 20
+distance = 3
 
-plate = Box(60, 40, 4)
-center_hole = Cylinder(radius=8, height=4)
+plate = Box(plateW, plateH, thckness)
 
-# four mounting holes, positioned with Pos(x, y, z) * solid
-mounts = [
-    Pos(x, y, 0) * Cylinder(radius=2.5, height=4)
-    for x in (-24, 24)
-    for y in (-14, 14)
-]
+vertical_edges = plate.edges().filter_by(Axis.Z)
+plate = fillet(vertical_edges, radius=2)
 
-part = plate - center_hole
-for hole in mounts:
-    part = part - hole
+center_hole = Cylinder(radius=3.5, height=thckness)
 
-show(part)
-save(part, "04_algebra_mode")
+startX = (plateW - distance * 2) / 2
+startY = (plateH - distance * 2) / 2
+
+screwHole = Cylinder(radius=1.5, height=thckness)
+for x in (-startX, startX):
+    for y in (-startY, startY):
+        hole = Pos(x, y, 0) * screwHole
+        plate -= hole
+
+
+plate = plate - center_hole
+
+
+show(plate)
+save(plate, "04_algebra_mode")
